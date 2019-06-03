@@ -301,3 +301,10 @@ func (c *MgmtClient) simpleCommand(cmd string) ([]byte, error) {
 	}
 	return c.readCommandResult()
 }
+
+func (c *MgmtClient)CloseConnection() (err error) {
+	if _, err = c.simpleCommand("exit"); err != nil {
+		_, err = c.simpleCommand("quit")
+	}
+	return err
+}
